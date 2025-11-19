@@ -9,7 +9,7 @@ A simple, robust Command Line Interface (CLI) application that fetches real-time
 * **Interactive:** Runs in a loop until you decide to quit.
 
 ## 🛠️ Tech Stack
-* **Language:** Python 3.x
+* **Language:** Python 3.11.5
 * **Libraries:** `requests`
 * **API:** OpenWeatherMap
 
