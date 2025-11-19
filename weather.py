@@ -3,6 +3,9 @@ import requests
 # Getting the secret API Key without directly embedding it the main file
 from config import apiKey
 
+# List of Yes Options 
+YES_OPTIONS = ["y","yes"]
+
 # Emoji for showing the weather visuals
 weather_emoji = {
     'Clear':'☀️', 
@@ -36,33 +39,40 @@ def get_weather(city, api_key):
         return None
 
 def main():
-    # Take the user input
-    city_name = input("Enter a city name: ")
+    while True:
+        # Take the user input
+        city_name = input("Enter a city name: ")
 
-    # Get the weather data for the city
-    weather_data = get_weather(city_name, apiKey)
+        # Get the weather data for the city
+        weather_data = get_weather(city_name, apiKey)
 
-    if weather_data != None:
-        # Display the Header
-        print("-" * 40)
-        print(f"Weather Report for {city_name}")
-        print("-" * 40)
-        # Display the weather description
-        print(weather_emoji.get(weather_data['weather'][0]['main'], "⚪"), end="   ")
-        print(weather_data['weather'][0]['description'])
-        # Display the Temperaure (in celsius)
-        print("🌡️", end = "   ")
-        print(f"Temperature: {weather_data['main']['temp']}\u00b0C")
-        # Display The Humidity(%)
-        print("💧", end = "   ")
-        print(f"Humidity: {weather_data['main']['humidity']}%")
-        # Display the Wind Speed(m/s)
-        print("💨", end = "   ")
-        print(f"Wind: {weather_data['wind']['speed']}m/s")
-        print("-" * 40)
-    else:
-        print("City Not Found.")
+        if weather_data != None:
+            # Display the Header
+            print("-" * 40)
+            print(f"Weather Report for {city_name}")
+            print("-" * 40)
+            # Display the weather description
+            print(weather_emoji.get(weather_data['weather'][0]['main'], "⚪"), end="   ")
+            print(weather_data['weather'][0]['description'])
+            # Display the Temperaure (in celsius)
+            print("🌡️", end = "   ")
+            print(f"Temperature: {weather_data['main']['temp']}\u00b0C")
+            # Display The Humidity(%)
+            print("💧", end = "   ")
+            print(f"Humidity: {weather_data['main']['humidity']}%")
+            # Display the Wind Speed(m/s)
+            print("💨", end = "   ")
+            print(f"Wind: {weather_data['wind']['speed']}m/s")
+            print("-" * 40)
+        else:
+            print("City Not Found.")
 
+        user_answer = input("Check another city ? (Y/N): ")
+
+        if user_answer.lower() in YES_OPTIONS:
+            continue
+        else:
+            break
 
 main()
 
